@@ -14,7 +14,7 @@ import (
 
 const (
 	CommandName     = "builder"
-	ArchiveFileName = "ipa.dict"
+	ArchiveFileName = "ko.dict"
 
 	usageMessage = "%s -dict <dict_path> [-other <other_dict_path>] -out <output_file_name>\n"
 )
@@ -67,7 +67,7 @@ func NewOption(w io.Writer, eh flag.ErrorHandling) *Option {
 	}
 	// option settings
 	o.flagSet.SetOutput(w)
-	o.flagSet.StringVar(&o.DictPath, "dict", "", "target dict path, ex. mecab-ipadic-2.7.0-20070801")
+	o.flagSet.StringVar(&o.DictPath, "dict", "", "target dict path, ex. mecab-ko-dic-2.1.1-20180720")
 	o.flagSet.Var(&o.OtherPath, "other", "other dict path, neologd etc...")
 	o.flagSet.StringVar(&o.OutputFileName, "out", ArchiveFileName, "output file name")
 	return o
