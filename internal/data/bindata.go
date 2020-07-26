@@ -35,6 +35,17 @@
 // dict/kodict.bg
 // dict/kodict.bh
 // dict/kodict.bi
+// dict/kodict.bj
+// dict/kodict.bk
+// dict/kodict.bl
+// dict/kodict.bm
+// dict/kodict.bn
+// dict/kodict.bo
+// dict/kodict.bp
+// dict/kodict.bq
+// dict/kodict.br
+// dict/kodict.bs
+// dict/kodict.bt
 // DO NOT EDIT!
 
 package data
@@ -165,6 +176,17 @@ var _bindata = map[string]func() (*asset, error){
 	"dict/kodict.bg": dictKodictBg,
 	"dict/kodict.bh": dictKodictBh,
 	"dict/kodict.bi": dictKodictBi,
+	"dict/kodict.bj": dictKodictBj,
+	"dict/kodict.bk": dictKodictBk,
+	"dict/kodict.bl": dictKodictBl,
+	"dict/kodict.bm": dictKodictBm,
+	"dict/kodict.bn": dictKodictBn,
+	"dict/kodict.bo": dictKodictBo,
+	"dict/kodict.bp": dictKodictBp,
+	"dict/kodict.bq": dictKodictBq,
+	"dict/kodict.br": dictKodictBr,
+	"dict/kodict.bs": dictKodictBs,
+	"dict/kodict.bt": dictKodictBt,
 }
 
 // AssetDir returns the file names below a certain
@@ -243,6 +265,17 @@ var _bintree = &bintree{nil, map[string]*bintree{
 		"kodict.bg": &bintree{dictKodictBg, map[string]*bintree{}},
 		"kodict.bh": &bintree{dictKodictBh, map[string]*bintree{}},
 		"kodict.bi": &bintree{dictKodictBi, map[string]*bintree{}},
+		"kodict.bj": &bintree{dictKodictBj, map[string]*bintree{}},
+		"kodict.bk": &bintree{dictKodictBk, map[string]*bintree{}},
+		"kodict.bl": &bintree{dictKodictBl, map[string]*bintree{}},
+		"kodict.bm": &bintree{dictKodictBm, map[string]*bintree{}},
+		"kodict.bn": &bintree{dictKodictBn, map[string]*bintree{}},
+		"kodict.bo": &bintree{dictKodictBo, map[string]*bintree{}},
+		"kodict.bp": &bintree{dictKodictBp, map[string]*bintree{}},
+		"kodict.bq": &bintree{dictKodictBq, map[string]*bintree{}},
+		"kodict.br": &bintree{dictKodictBr, map[string]*bintree{}},
+		"kodict.bs": &bintree{dictKodictBs, map[string]*bintree{}},
+		"kodict.bt": &bintree{dictKodictBt, map[string]*bintree{}},
 	}},
 }}
 

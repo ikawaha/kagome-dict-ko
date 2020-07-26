@@ -10,7 +10,6 @@ import (
 
 	"github.com/ikawaha/kagome/v2/dict/builder"
 	"golang.org/x/text/encoding"
-	"golang.org/x/text/encoding/japanese"
 )
 
 const (
@@ -38,7 +37,7 @@ var (
 		WeigthIndex:             3,
 		OtherContentsStartIndex: 4,
 	}
-	FileEncoding encoding.Encoding = japanese.EUCJP // set nil if utf8 (default)
+	FileEncoding encoding.Encoding = nil // set nil if utf8 (default)
 )
 
 type Paths []string
