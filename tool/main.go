@@ -27,7 +27,9 @@ var (
 		RightIDIndex:            2,
 		WeightIndex:             3,
 		POSStartIndex:           4,
-		OtherContentsStartIndex: 8,
+		OtherContentsStartIndex: 5,
+		// extra
+		ReadingIndex: 7,
 	}
 	UnkRecordInfo = builder.UnkRecordInfo{
 		ColSize:                 12,
@@ -35,6 +37,7 @@ var (
 		LeftIDIndex:             1,
 		RightIndex:              2,
 		WeigthIndex:             3,
+		POSStartIndex:           4,
 		OtherContentsStartIndex: 4,
 	}
 	FileEncoding encoding.Encoding = nil // set nil if utf8 (default)
