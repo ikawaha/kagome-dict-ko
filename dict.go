@@ -11,6 +11,35 @@ import (
 	"github.com/ikawaha/kagome/v2/dict"
 )
 
+type FeatureIndex int
+
+const (
+	// Features are information given to a word, such as follows:
+	// 공원	NNG,장소,T,공원,*,*,*,*
+	// 에	JKB,*,F,에,*,*,*,*
+	// 갔	VV+EP,*,T,갔,Inflect,VV,EP,가/VV/*+았/EP/*
+	// 다	EF,*,F,다,*,*,*,*
+	// .	SF,*,*,*,*,*,*,*
+	// EOS
+	// POSHierarchy represents part-of-speech hierarchy
+	// e.g. Columns NNG POSs which hierarchy depth is 1.
+	POSHierarchy = 1
+	// Meaning
+	Meaning FeatureIndex = 1
+	// Presence or absence, T for true; F for false; else *.
+	PresenceOrAbsence = 2
+	// Reading, usually matches surface, but may differ for foreign words e.g. Chinese character words.
+	Reading = 3
+	// Type, one of: Inflect (활용); Compound (복합명사); or Preanalysis (기분석).
+	Type = 4
+	// FirstPOS, e.g. given a part-of-speech tag of "VV+EM+VX+EP", would return VV.
+	FirstPOS = 5
+	// LastPOS, e.g. given a part-of-speech tag of "VV+EM+VX+EP", would return EP.
+	LastPOS = 6
+	// Expression, fields that tell how usage, compound nouns, and key analysis are organized.
+	Expression = 7
+)
+
 type systemDict struct {
 	once sync.Once
 	dict *dict.Dict

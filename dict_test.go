@@ -1,6 +1,7 @@
 package ko
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/ikawaha/kagome/v2/dict"
@@ -12,7 +13,7 @@ const (
 	testDictPath    = "testdata/ko.dict"
 )
 
-func TestDictShrink(t *testing.T) {
+func Test_DictShrink(t *testing.T) {
 	d := DictShrink()
 	if want, got := KoDictEntrySize, len(d.Morphs); want != got {
 		t.Errorf("want %d, got %d", want, got)
@@ -22,7 +23,7 @@ func TestDictShrink(t *testing.T) {
 	}
 }
 
-func TestLoadShrink(t *testing.T) {
+func Test_LoadShrink(t *testing.T) {
 	d, err := dict.LoadShrink(testDictPath)
 	if err != nil {
 		t.Fatalf("unexpected error, %v", err)
@@ -35,7 +36,7 @@ func TestLoadShrink(t *testing.T) {
 	}
 }
 
-func TestNew(t *testing.T) {
+func Test_New(t *testing.T) {
 	d := Dict()
 	if want, got := KoDictEntrySize, len(d.Morphs); want != got {
 		t.Errorf("want %d, got %d", want, got)
@@ -45,7 +46,7 @@ func TestNew(t *testing.T) {
 	}
 }
 
-func TestLoadDictFile(t *testing.T) {
+func Test_LoadDictFile(t *testing.T) {
 	d, err := dict.LoadDictFile(testDictPath)
 	if err != nil {
 		t.Fatalf("unexpected error, %v", err)
@@ -58,7 +59,7 @@ func TestLoadDictFile(t *testing.T) {
 	}
 }
 
-func TestSingleton(t *testing.T) {
+func Test_Singleton(t *testing.T) {
 	a := Dict()
 	b := Dict()
 	if a != b {
@@ -66,42 +67,61 @@ func TestSingleton(t *testing.T) {
 	}
 }
 
-func TestContentsMeta(t *testing.T) {
+func Test_ContentsMeta(t *testing.T) {
 	d := Dict()
 	if want, got := 0, d.ContentsMeta[dict.POSStartIndex]; want != int(got) {
 		t.Errorf("pos start index: want %d, got %d", want, got)
 	}
-	if want, got := 1, d.ContentsMeta[dict.POSEndIndex]; want != int(got) {
+	if want, got := 1, d.ContentsMeta[dict.POSHierarchy]; want != int(got) {
 		t.Errorf("pos end index: want %d, got %d", want, got)
-	}
-	if v := d.ContentsMeta[dict.BaseFormIndex]; v >= 0 {
-		t.Errorf("base form index: want <0, got %v", v)
 	}
 	if want, got := 3, d.ContentsMeta[dict.ReadingIndex]; want != int(got) {
 		t.Errorf("reading index: want %d, got %d", want, got)
 	}
-	if v := d.ContentsMeta[dict.PronunciationIndex]; v >= 0 {
-		t.Errorf("pronunciation index: want <0, got %v", v)
+	// undef.
+	if v, ok := d.ContentsMeta[dict.PronunciationIndex]; ok {
+		t.Errorf("pronunciation index: want !ok, got %v", v)
 	}
 }
 
-func TestReading(t *testing.T) {
+func Test_Reading(t *testing.T) {
 	tnz, err := tokenizer.New(Dict())
 	if err != nil {
 		t.Fatalf("unexpected error, %v", err)
 	}
-	tokens := tnz.Tokenize("초밥이먹고싶다.")
-	if want, got := 9, len(tokens); want != got {
+
+	tokens := tnz.Tokenize("공원에갔다.")
+	if want, got := 7, len(tokens); want != got {
 		t.Fatalf("token length: want %d, got %d", want, got)
 	}
 	//BOS
 	if got, ok := tokens[0].Reading(); ok {
 		t.Errorf("want !ok, got %q", got)
 	}
-	//초밥->초밥
+	//공원 -> 공원
 	if got, ok := tokens[1].Reading(); !ok {
 		t.Error("want ok, but !ok")
-	} else if want := "초밥"; want != got {
+	} else if want := "공원"; want != got {
 		t.Fatalf("want %s, got %s", want, got)
+	}
+}
+
+func Test_POS(t *testing.T) {
+	tnz, err := tokenizer.New(Dict())
+	if err != nil {
+		t.Fatalf("unexpected error, %v", err)
+	}
+
+	tokens := tnz.Tokenize("공원에갔다.")
+	if want, got := 7, len(tokens); want != got {
+		t.Fatalf("token length: want %d, got %d", want, got)
+	}
+	//BOS
+	if got := tokens[0].POS(); len(got) > 0 {
+		t.Errorf("want empty, got %+v", got)
+	}
+	//갔
+	if want, got := []string{"VV+EP"}, tokens[3].POS(); !reflect.DeepEqual(want, got) {
+		t.Fatalf("want %+v, got %+v", want, got)
 	}
 }
