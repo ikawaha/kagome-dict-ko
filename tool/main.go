@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ikawaha/kagome/v2/dict"
-	"github.com/ikawaha/kagome/v2/dict/builder"
+	"github.com/ikawaha/kagome-dict/dict"
+	"github.com/ikawaha/kagome-dict/dict/builder"
 	"golang.org/x/text/encoding"
 )
 
