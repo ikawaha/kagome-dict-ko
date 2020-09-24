@@ -1,5 +1,5 @@
 module github.com/ikawaha/kagome-dict-ko
 
-go 1.14
+go 1.15
 
-require github.com/ikawaha/kagome/v2 v2.0.5
+require github.com/ikawaha/kagome-dict v1.0.0
