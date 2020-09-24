@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/ikawaha/kagome-dict-ko/internal/data"
-	"github.com/ikawaha/kagome/v2/dict"
+	"github.com/ikawaha/kagome-dict/dict"
 )
 
 type FeatureIndex int
@@ -74,7 +74,7 @@ func loadDict(full bool) (d *dict.Dict) {
 	pieces := data.AssetNames()
 	sort.Strings(pieces)
 
-	rs := make([]SizeReaderAt, 0, len(pieces))
+	rs := make([]dict.SizeReaderAt, 0, len(pieces))
 	for _, v := range pieces {
 		b, err := data.Asset(v)
 		if err != nil {
@@ -82,7 +82,7 @@ func loadDict(full bool) (d *dict.Dict) {
 		}
 		rs = append(rs, bytes.NewReader(b))
 	}
-	r := NewMultiSizeReaderAt(rs...)
+	r := dict.MultiSizeReaderAt(rs...)
 	zr, err := zip.NewReader(r, r.Size())
 	if err != nil {
 		panic(err)
