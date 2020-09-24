@@ -17,7 +17,7 @@ func dictKodictBl() (*asset, error) {
 		return nil, err
 	}
 
-	info := bindataFileInfo{name: "dict/kodict.bl", size: 524288, mode: os.FileMode(420), modTime: time.Unix(1596857148, 0)}
+	info := bindataFileInfo{name: "dict/kodict.bl", size: 524288, mode: os.FileMode(420), modTime: time.Unix(1600948094, 0)}
 	a := &asset{bytes: bytes, info: info}
 	return a, nil
 }
